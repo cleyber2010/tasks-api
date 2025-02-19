@@ -2,6 +2,7 @@
   "name": "tasks-api",
   "version": "1.0.0",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "dev": "node --watch ./src/server.js"
   },
