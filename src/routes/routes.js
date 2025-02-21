@@ -17,6 +17,9 @@ export const routes = [
         handler: (req, res) => {
             const data = {
                 id: randomUUID(),
+                completed_at: null,
+                created_at: new Date().toISOString().slice(0, 19),
+                updated_at: null,
                 ...req.body
             }
 
