@@ -4,5 +4,5 @@ export function buildRoutes(path) {
     //Substituindo o parametro pela regex, toda url que atender os parametros da regex retornaram test ok.
     const pathWithParams = path.replaceAll(pathParamsRegex, '(?<$1>[a-zA-Z0-9\-_]+)');
 
-    return new RegExp(`^${pathWithParams}`);
+    return new RegExp(`^${pathWithParams}(?<query>\\?(.*))?`);
 }
