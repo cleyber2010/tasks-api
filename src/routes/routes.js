@@ -1,3 +1,7 @@
+import {Database} from "../database/database.js";
+
+const database = new Database();
+
 export const routes = [
     {
         method: 'GET',
@@ -10,6 +14,7 @@ export const routes = [
         method: 'POST',
         path: '/tasks',
         handler: (req, res) => {
+
             res.writeHead(201).end();
         }
     },
