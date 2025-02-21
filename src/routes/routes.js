@@ -1,12 +1,13 @@
 import {Database} from "../database/database.js";
 import { randomUUID } from "crypto";
+import {buildRoutes} from "../utils/build-route.js";
 
 const database = new Database();
 
 export const routes = [
     {
         method: 'GET',
-        path: '/tasks',
+        path: buildRoutes('/tasks'),
         handler: (req, res) => {
             res.writeHead(200, {'Content-Type' : 'application/json'}).end(JSON.stringify(database.select("tasks")));
         }
@@ -30,21 +31,21 @@ export const routes = [
     },
     {
         method: 'PUT',
-        path: '/tasks/:id',
+        path: buildRoutes('/tasks/:id'),
         handler: (req, res) => {
             res.writeHead(201).end();
         }
     },
     {
         method: 'DELETE',
-        path: '/tasks/:id',
+        path: buildRoutes('/tasks/:id'),
         handler: (req, res) => {
             res.writeHead(204).end();
         }
     },
     {
         method: 'PATCH',
-        path: '/tasks/:id/complete',
+        path: buildRoutes('/tasks/:id/complete'),
         handler: (req, res) => {
             res.writeHead(201).end();
         }
