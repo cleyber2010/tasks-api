@@ -23,7 +23,7 @@ export const routes = [
                 ...req.body
             }
 
-            console.log(data);
+            database.insert("tasks", data);
 
             res.writeHead(201).end();
         }
