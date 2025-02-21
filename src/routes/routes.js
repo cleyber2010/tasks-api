@@ -8,7 +8,7 @@ export const routes = [
         method: 'GET',
         path: '/tasks',
         handler: (req, res) => {
-            res.writeHead(200).end();
+            res.writeHead(200, {'Content-Type' : 'application/json'}).end(JSON.stringify(database.select("tasks")));
         }
     },
     {
