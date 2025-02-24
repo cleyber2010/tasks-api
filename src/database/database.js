@@ -25,21 +25,29 @@ export class Database {
     }
 
     insert(table, data) {
+        if (data.title == null && data.description == null) {
+            return false;
+        }
         if (Array.isArray(this.#database[table])) {
             this.#database[table].push(data);
         } else {
             this.#database[table] = [data];
         }
         this.#persist();
+        return true;
     }
 
     update (table, id, data) {
         const index = this.#database[table].findIndex(item => item.id === id);
-        if (index > -1) {
+        if (index > -1 && (data.title != null || data.description != null)) {
             this.#database[table][index].updated_at = new Date().toISOString().slice(0, 19);
             this.#database[table][index].title = data.title;
             this.#database[table][index].description = data.description;
             this.#persist();
+            return true;
+        } else {
+            console.log("Task not found");
+            return false;
         }
     }
 
@@ -48,6 +56,10 @@ export class Database {
         if (index > -1) {
             this.#database[table][index].completed_at = new Date().toISOString().slice(0, 19);
             this.#persist();
+            return true;
+        } else {
+            console.log("Task not found");
+            return false;
         }
     }
 
@@ -60,6 +72,10 @@ export class Database {
         if (index > -1) {
             this.#database[table].splice(index, 1);
             this.#persist();
+            return true;
+        }  else {
+            console.log("Task not found");
+            return false;
         }
     }
 
