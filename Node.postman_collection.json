@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "fe61d902-06d2-41e2-bde7-0b15257a170b",
+		"name": "Node",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21059933"
+	},
+	"item": [
+		{
+			"name": "List Tasks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base}}/tasks",
+					"host": [
+						"{{base}}"
+					],
+					"path": [
+						"tasks"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "10",
+							"disabled": true
+						},
+						{
+							"key": "search",
+							"value": "tafera",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Task",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Nova tarefa\",\r\n    \"description\": \"descrição da tafera\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base}}/tasks",
+					"host": [
+						"{{base}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Task CSV",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Nova tarefa\",\r\n    \"description\": \"descrição da tafera\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base}}/tasks/teste",
+					"host": [
+						"{{base}}"
+					],
+					"path": [
+						"tasks",
+						"teste"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Task",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Tarefa atualizada\",\r\n    \"description\": \"descrição da tarefa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base}}/tasks/5d4e6fe6-e58c-4bc1-84ac-1950189a6164",
+					"host": [
+						"{{base}}"
+					],
+					"path": [
+						"tasks",
+						"5d4e6fe6-e58c-4bc1-84ac-1950189a6164"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Task Completed",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Tarefa atualizada\",\r\n    \"description\": \"descrição da tarefa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base}}/tasks/5d4e6fe6-e58c-4bc1-84ac-1950189a6164",
+					"host": [
+						"{{base}}"
+					],
+					"path": [
+						"tasks",
+						"5d4e6fe6-e58c-4bc1-84ac-1950189a6164"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Task",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base}}/tasks/0cd13b50-b7f7-48fe-b41e-cc3f027cd11a",
+					"host": [
+						"{{base}}"
+					],
+					"path": [
+						"tasks",
+						"0cd13b50-b7f7-48fe-b41e-cc3f027cd11a"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
