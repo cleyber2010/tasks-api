@@ -38,6 +38,11 @@ export const routes = [
         method: 'PUT',
         path: buildRoutes('/tasks/:id'),
         handler: (req, res) => {
+            const { id } = req.params;
+            const data = {
+                ...req.body
+            }
+            database.update("tasks", id, data);
             res.writeHead(201).end();
         }
     },
@@ -45,6 +50,8 @@ export const routes = [
         method: 'DELETE',
         path: buildRoutes('/tasks/:id'),
         handler: (req, res) => {
+            const { id } = req.params;
+            database.delete("tasks", id);
             res.writeHead(204).end();
         }
     },

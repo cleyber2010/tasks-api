@@ -37,7 +37,17 @@ export class Database {
     update (table, id, data) {
         const index = this.#database[table].findIndex(item => item.id === id);
         if (index > -1) {
-            this.#database[table][index] = {id, ...data};
+            this.#database[table][index].updated_at = new Date().toISOString().slice(0, 19);
+            this.#database[table][index].title = data.title;
+            this.#database[table][index].description = data.description;
+            this.#persist();
+        }
+    }
+
+    delete (table, id) {
+        const index = this.#database[table].findIndex(item => item.id === id);
+        if (index > -1) {
+            this.#database[table].splice(index, 1);
             this.#persist();
         }
     }
