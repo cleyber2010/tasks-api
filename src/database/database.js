@@ -14,7 +14,14 @@ export class Database {
             .catch(() => this.#persist());
     }
 
-    select(table) {
+    select(table, search) {
+        if (search) {
+            return this.#database[table].filter((row) => {
+                return Object.entries(search).some(([key, value]) => {
+                    return row[key].toLowerCase().includes(value.toLowerCase());
+                })
+            });
+        }
         return this.#database[table] ?? [];
     }
 
@@ -25,6 +32,14 @@ export class Database {
             this.#database[table] = [data];
         }
         this.#persist();
+    }
+
+    update (table, id, data) {
+        const index = this.#database[table].findIndex(item => item.id === id);
+        if (index > -1) {
+            this.#database[table][index] = {id, ...data};
+            this.#persist();
+        }
     }
 
     #persist() {

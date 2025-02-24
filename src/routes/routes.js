@@ -9,12 +9,17 @@ export const routes = [
         method: 'GET',
         path: buildRoutes('/tasks'),
         handler: (req, res) => {
-            res.writeHead(200, {'Content-Type' : 'application/json'}).end(JSON.stringify(database.select("tasks")));
+            const { search } = req.query;
+            res.writeHead(200, {'Content-Type' : 'application/json'})
+                .end(JSON.stringify(database.select("tasks", search ? {
+                    title: search,
+                    description: search
+                } : null)));
         }
     },
     {
         method: 'POST',
-        path: '/tasks',
+        path: buildRoutes('/tasks'),
         handler: (req, res) => {
             const data = {
                 id: randomUUID(),
