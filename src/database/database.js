@@ -44,6 +44,14 @@ export class Database {
         }
     }
 
+    completed(table, id) {
+        const index = this.#database[table].findIndex(item => item.id === id);
+        if (index > -1) {
+            this.#database[table][index].completed_at = new Date().toISOString().slice(0, 19);
+            this.#persist();
+        }
+    }
+
     delete (table, id) {
         const index = this.#database[table].findIndex(item => item.id === id);
         if (index > -1) {
