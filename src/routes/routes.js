@@ -1,6 +1,8 @@
 import {Database} from "../database/database.js";
 import { randomUUID } from "crypto";
 import {buildRoutes} from "../utils/build-route.js";
+import fs from 'node:fs';
+import { parse } from "csv-parse";
 
 const database = new Database();
 
@@ -28,8 +30,44 @@ export const routes = [
                 updated_at: null,
                 ...req.body
             }
-
             database.insert("tasks", data);
+
+            res.writeHead(201).end();
+        }
+    },
+    {
+        method: 'POST',
+        path: buildRoutes('/csv'),
+        handler: (req, res) => {
+            const filePath = new URL('../../tasks.csv', import.meta.url);
+            const processFile = async () => {
+                const records = [];
+                const parser = fs.createReadStream(filePath)
+                    .pipe(parse());
+                for await (const record of parser) {
+                    records.push(record);
+                }
+                return records;
+            }
+            const records = async () => {
+                const records = await processFile();
+                records.shift();
+                for (const task of records) {
+                    const [title, description] = task.join(",").split(",");
+                    let data = {
+                        id: randomUUID(),
+                        completed_at: null,
+                        created_at: new Date().toISOString().slice(0, 19),
+                        updated_at: null,
+                        title,
+                        description
+                    }
+                    database.insert("tasks", data);
+                }
+            }
+
+            records()
+                .then(() => console.log('Done'));
 
             res.writeHead(201).end();
         }

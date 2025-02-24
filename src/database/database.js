@@ -1,5 +1,4 @@
 import fs from 'node:fs/promises'
-
 const databasePath = new URL("../db.json", import.meta.url);
 export class Database {
     #database = {};
@@ -50,6 +49,10 @@ export class Database {
             this.#database[table][index].completed_at = new Date().toISOString().slice(0, 19);
             this.#persist();
         }
+    }
+
+    createTaskCsv(table, data) {
+
     }
 
     delete (table, id) {

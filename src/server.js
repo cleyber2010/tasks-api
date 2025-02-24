@@ -16,7 +16,9 @@ const server = http.createServer(async (req, res) => {
         req.body = null;
     }
 
-    const route = routes.filter(item => item.method === method && item.path.test(url))[0];
+    const route = routes.find(route => {
+        return route.method === method && route.path.test(url) && url.match(route.path);
+    });
     /**
      * Falta finalizar os testes com o extractQuery
      */
